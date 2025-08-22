@@ -1,4 +1,4 @@
-baseURL = "https://<GitHub-username>.github.io/portfolio/"
+baseURL = "https://swlee3306.github.io/swlee-portfolio/"
 languageCode = "ko-kr"
 title = "swLee Tech Blog"
 theme = "PaperMod"
