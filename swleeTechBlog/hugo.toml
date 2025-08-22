@@ -1,7 +1,6 @@
 baseURL = "https://swlee3306.github.io/swlee-portfolio/"
 languageCode = "ko-kr"
 title = "swLee Tech Blog"
-theme = "PaperMod"
 # (선택) 경로 깨짐 방지에 도움
 canonifyURLs = true
 theme = "PaperMod"
