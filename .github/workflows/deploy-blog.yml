@@ -27,7 +27,7 @@ jobs:
           hugo-version: 'latest'
 
       - name: Build
-        working-directory: ./blogsite
+        working-directory: ./swleeTechBlog
         run: hugo --minify
 
       - name: Upload artifact
