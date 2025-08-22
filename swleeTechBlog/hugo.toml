@@ -4,3 +4,4 @@ title = "swLee Tech Blog"
 theme = "PaperMod"
 # (선택) 경로 깨짐 방지에 도움
 canonifyURLs = true
+theme = "PaperMod"
