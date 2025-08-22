@@ -1,52 +1,39 @@
-name: Deploy Hugo blog to GitHub Pages
+name: Deploy Blog (Hugo → GitHub Pages)
 
 on:
   push:
     branches: [ main ]
     paths:
-      - 'blog/**'
+      - 'blogsite/**'
       - '.github/workflows/deploy-blog.yml'
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
-
 jobs:
-  build:
+  build-deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: 'pages'
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (with submodules for themes)
-        uses: actions/checkout@v4
-        with:
-          submodules: true
+      - uses: actions/checkout@v4
+        with: { submodules: true }  # theme submodule
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'   # extended 자동 지원
-        # 참고: actions-hugo는 Hugo 설치용 액션이다.  [oai_citation:3‡GitHub](https://github.com/peaceiris/actions-hugo?utm_source=chatgpt.com)
+          hugo-version: 'latest'
 
-      - name: Build Hugo
-        working-directory: ./blog
+      - name: Build
+        working-directory: ./blogsite
         run: hugo --minify
 
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./blog/public
-        # upload-pages-artifact → deploy-pages 조합이 공식 권장 경로다.  [oai_citation:4‡GitHub](https://github.com/actions/deploy-pages?utm_source=chatgpt.com)
+          path: ./swleeTechBlog/public
 
-  deploy:
-    environment:
-      name: github-pages
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-        # deploy-pages는 build job에서 올린 artifact를 받아 Pages에 반영한다.  [oai_citation:5‡GitHub](https://github.com/actions/deploy-pages?utm_source=chatgpt.com)
